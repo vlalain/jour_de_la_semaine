@@ -1,0 +1,69 @@
+print("Ce programme a pour but de déterminer le jour de la semaine selon une date donnée.")
+
+#On demande à l'utilisateur de saisir une date:
+num = int(input("Entrez le numéro du jour de la date:"))
+month = input("Entrez le mois de la date:")
+year = int(input("Entrez l'année de la date:"))
+
+
+# On récupère les deux derniers chiffres de l'année
+finyear = (year%100)
+
+# On divise ces deux derniers chiffres par 4 tout en ignorant le reste
+divyear = int(finyear // 4)
+
+
+# On associe le mois entré à son code
+if month == "janvier" or month == "octobre":
+    monthid = int(0)
+elif month == "avril" or month == "juillet":
+    monthid = int(6)
+elif month == "septembre" or month == "décembre":
+    monthid = int(5)
+elif month == "juin":
+    monthid = int(4)
+elif month == "août":
+    monthid = int(2)
+elif month == "mai":
+    monthid = int(1)
+else:
+    monthid = int(3)
+
+#On associe l'année entrée à son code
+if 1699 < year < 1800 or year > 2099:
+    idyear = int(4)
+elif 1799 < year < 1900:
+    idyear = int(2)
+elif 1899 < year < 2000:
+    idyear = int(0)
+else:
+    idyear = int(6)
+
+#On applique la spécificité des années bisextiles (lorsque l'année est bisexstile on enlève 1 au code mois pour Janvier et février
+if (year % 400 == 0 or (year % 100 != 0)) and month == "janvier" or month == "février":
+    monthid = monthid -1
+
+
+#On ajoute chaque code obtenus et on garde le reste de la division Euclidienne de cette somme par 7.
+calcul = int(finyear + divyear + num + monthid + idyear)
+
+calcul = calcul % 7
+
+#Le reste obtenu est l'équivalent d'un jour comme ci dessous:
+if calcul == 0:
+    jour = "Dimanche"
+elif calcul == 1:
+    jour = "Lundi"
+elif calcul == 2:
+    jour = "Mardi"
+elif calcul == 3:
+    jour = "Mercredi"
+elif calcul == 4:
+    jour = "Jeudi"
+elif calcul == 5:
+    jour = "Vendredi"
+elif calcul == 6:
+    jour = "Samedi"
+
+#On renvoit le résultat à l'utilisateur
+print("le jour pour la date donnée est:", jour)
